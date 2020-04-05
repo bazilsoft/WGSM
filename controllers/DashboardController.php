@@ -33,8 +33,10 @@ class DashboardController extends Controller
 
         $Query = new SourceQuery();
 
-        $serverAddress = '185.189.255.19';
-        $serverPort = 29070;
+        $param = Yii::$app->params['servers'][0];
+        $serverAddress = $param['address'];
+        $serverPort =  $param['port'];
+        $pass =  $param['pass'];
         $timeout = 1;
         $engine = SourceQuery::SOURCE;
 
@@ -68,8 +70,10 @@ class DashboardController extends Controller
 
     public function actionMessage()
     {
-        $serverAddress = '185.189.255.19';
-        $serverPort = 29070;
+        $param = Yii::$app->params['servers'][0];
+        $serverAddress = $param['address'];
+        $serverPort =  $param['port'];
+        $pass =  $param['pass'];
         $timeout = 1;
         $engine = SourceQuery::SOURCE;
         $Query = new SourceQuery();
@@ -99,7 +103,7 @@ class DashboardController extends Controller
 //                $message = 'ServerChat Admin: ' . iconv('utf-8', 'windows-1251', $model->message) ."\n \n" ;
 
                 $Query->Connect($serverAddress, $serverPort, $timeout, $engine);
-                $Query->SetRconPassword('ccie82CGk90');
+                $Query->SetRconPassword($pass);
 //                $convertedText = utf8_encode ( $message );
 //                $convertedText = mb_convert_encoding($message, 'utf-8', mb_detect_encoding($message));
 
@@ -127,7 +131,7 @@ class DashboardController extends Controller
 //            }
 
                 $Query->Connect($serverAddress, $serverPort, $timeout, $engine);
-                $Query->SetRconPassword('ccie82CGk90');
+                $Query->SetRconPassword($pass);
                 $an = $Query->Rcon($message); // отправка сообщения
 //
 //            if ($an == 'Server received, But no response!! '){
@@ -178,8 +182,10 @@ class DashboardController extends Controller
 
     public function actionRefreshChat()
     {
-        $serverAddress = '185.189.255.19';
-        $serverPort = 29070;
+        $param = Yii::$app->params['servers'][0];
+        $serverAddress = $param['address'];
+        $serverPort =  $param['port'];
+        $pass =  $param['pass'];
         $timeout = 1;
         $engine = SourceQuery::SOURCE;
         $Query = new SourceQuery();
@@ -211,7 +217,7 @@ class DashboardController extends Controller
             }
 
             $Query->Connect($serverAddress, $serverPort, $timeout, $engine);
-            $Query->SetRconPassword('ccie82CGk90');
+            $Query->SetRconPassword($pass);
             $chat = $Query->Rcon('GetChat');
 
             if($chat == "Server received, But no response!! \n "){
